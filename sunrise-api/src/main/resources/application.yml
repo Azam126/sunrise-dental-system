@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: sunrise-api
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/sunrise_dental?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+    username: ${DB_USERNAME:sunrise_app}
+    password: ${DB_PASSWORD:changeme}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      # schema.sql/data.sql are the source of truth for structure — Hibernate
+      # only validates the entities match, it never generates DDL itself.
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+
+sunrise:
+  jwt:
+    secret: ${JWT_SECRET:change-this-to-a-long-random-secret-before-deployment-32chars+}
+    expiration-ms: 28800000   # 8 hours — a typical clinic shift
+
+logging:
+  level:
+    lk.zaa.sunrise: INFO
