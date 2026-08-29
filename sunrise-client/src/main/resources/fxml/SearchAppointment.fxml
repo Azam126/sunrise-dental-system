@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="10" styleClass="root-pane"
+      xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="lk.zaa.sunrise.client.controller.SearchAppointmentController">
+    <padding><Insets top="20" right="30" bottom="20" left="30"/></padding>
+
+    <Label text="Search / View Appointment" styleClass="title-label">
+        <font><Font size="18"/></font>
+    </Label>
+
+    <HBox spacing="10">
+        <TextField fx:id="appointmentNumberField" promptText="Appointment number, e.g. APT-20260829-0001" prefWidth="280"/>
+        <Button text="Search" onAction="#handleSearch"/>
+    </HBox>
+
+    <Label fx:id="messageLabel" styleClass="error-label" wrapText="true"/>
+
+    <GridPane hgap="10" vgap="6" visible="false" fx:id="resultsPane">
+        <Label text="Patient Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Label fx:id="patientNameLabel" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Label text="Address:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <Label fx:id="addressLabel" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <Label text="Contact Number:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <Label fx:id="contactLabel" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        <Label text="Dentist:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <Label fx:id="dentistLabel" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+        <Label text="Treatment:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <Label fx:id="treatmentLabel" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+        <Label text="Date / Time:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+        <Label fx:id="dateTimeLabel" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+        <Label text="Status:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+        <Label fx:id="statusLabel" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <Button text="Back to Main Menu" onAction="#handleBack"/>
+</VBox>
