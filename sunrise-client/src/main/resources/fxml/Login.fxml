@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="14" styleClass="root-pane"
+      xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="lk.zaa.sunrise.client.controller.LoginController">
+    <padding>
+        <Insets top="40" right="40" bottom="40" left="40"/>
+    </padding>
+
+    <Label text="Sunrise Dental Clinic" styleClass="title-label">
+        <font><Font size="22"/></font>
+    </Label>
+    <Label text="Appointment &amp; Patient Management System" styleClass="subtitle-label"/>
+
+    <GridPane hgap="10" vgap="10" alignment="CENTER">
+        <padding><Insets top="20"/></padding>
+        <Label text="Username:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="usernameField" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="220"/>
+        <Label text="Password:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <PasswordField fx:id="passwordField" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="220"/>
+    </GridPane>
+
+    <Label fx:id="errorLabel" styleClass="error-label" wrapText="true"/>
+
+    <Button text="Login" defaultButton="true" onAction="#handleLogin" prefWidth="120"/>
+    <Label text="v1.0 — Sunrise Dental Clinic System" styleClass="footer-label"/>
+</VBox>

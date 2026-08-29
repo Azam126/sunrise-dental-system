@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="10" styleClass="root-pane"
+      xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="lk.zaa.sunrise.client.controller.HelpController">
+    <padding><Insets top="20" right="30" bottom="20" left="30"/></padding>
+
+    <Label text="Help Guide" styleClass="title-label">
+        <font><Font size="18"/></font>
+    </Label>
+
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+        <TextArea fx:id="helpTextArea" wrapText="true" editable="false" prefHeight="320"/>
+    </ScrollPane>
+
+    <Button text="Back to Main Menu" onAction="#handleBack"/>
+</VBox>

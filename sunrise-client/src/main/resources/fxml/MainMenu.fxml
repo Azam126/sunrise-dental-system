@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="lk.zaa.sunrise.client.controller.MainMenuController">
+    <top>
+        <VBox spacing="4" styleClass="header-pane">
+            <padding><Insets top="16" right="20" bottom="16" left="20"/></padding>
+            <Label text="Sunrise Dental Clinic — Main Menu" styleClass="title-label">
+                <font><Font size="18"/></font>
+            </Label>
+            <Label fx:id="welcomeLabel" styleClass="subtitle-label"/>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="12">
+            <padding><Insets top="20" bottom="20"/></padding>
+            <Button text="Register New Appointment" prefWidth="260" onAction="#openRegisterAppointment"/>
+            <Button text="Search / View Appointment" prefWidth="260" onAction="#openSearchAppointment"/>
+            <Button text="Generate &amp; Print Bill" prefWidth="260" onAction="#openBill"/>
+            <Button fx:id="manageStaffButton" text="Manage Staff Accounts (Admin)" prefWidth="260" onAction="#openManageStaff" managed="false" visible="false"/>
+            <Button text="Help Guide" prefWidth="260" onAction="#openHelp"/>
+            <Button text="Exit" prefWidth="260" onAction="#handleExit"/>
+        </VBox>
+    </center>
+</BorderPane>
