@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="10" styleClass="root-pane"
+      xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="lk.zaa.sunrise.client.controller.ManageStaffController">
+    <padding><Insets top="20" right="30" bottom="20" left="30"/></padding>
+
+    <Label text="Manage Staff Accounts (Administrator)" styleClass="title-label">
+        <font><Font size="16"/></font>
+    </Label>
+
+    <TableView fx:id="usersTable" prefHeight="220">
+        <columns>
+            <TableColumn fx:id="usernameColumn" text="Username" prefWidth="140"/>
+            <TableColumn fx:id="fullNameColumn" text="Full Name" prefWidth="180"/>
+            <TableColumn fx:id="roleColumn" text="Role" prefWidth="140"/>
+        </columns>
+    </TableView>
+
+    <Separator/>
+    <Label text="Add New Staff Account" styleClass="subtitle-label"/>
+
+    <GridPane hgap="10" vgap="6">
+        <Label text="Username:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="newUsernameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Label text="Password:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <PasswordField fx:id="newPasswordField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <Label text="Full Name:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="newFullNameField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        <Label text="Role:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="newRoleComboBox" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <Label fx:id="messageLabel" styleClass="error-label" wrapText="true"/>
+
+    <HBox spacing="10">
+        <Button text="Add Staff Account" onAction="#handleAddUser"/>
+        <Button text="Refresh List" onAction="#handleRefresh"/>
+        <Button text="Back to Main Menu" onAction="#handleBack"/>
+    </HBox>
+</VBox>
