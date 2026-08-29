@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="10" styleClass="root-pane"
+      xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="lk.zaa.sunrise.client.controller.BillController">
+    <padding><Insets top="20" right="30" bottom="20" left="30"/></padding>
+
+    <Label text="Generate &amp; Print Bill" styleClass="title-label">
+        <font><Font size="18"/></font>
+    </Label>
+
+    <HBox spacing="10">
+        <TextField fx:id="appointmentNumberField" promptText="Appointment number" prefWidth="280"/>
+        <Button text="Generate Bill" onAction="#handleGenerate"/>
+    </HBox>
+
+    <Label fx:id="messageLabel" styleClass="error-label" wrapText="true"/>
+
+    <VBox spacing="6" visible="false" fx:id="billPane" styleClass="bill-pane">
+        <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+        <Label text="SUNRISE DENTAL CLINIC" styleClass="title-label"/>
+        <Label text="Patient Receipt" styleClass="subtitle-label"/>
+        <Separator/>
+        <Label fx:id="billNumberLabel"/>
+        <Label fx:id="billPatientLabel"/>
+        <Label fx:id="billTreatmentLabel"/>
+        <Label fx:id="billFeeLabel"/>
+        <Separator/>
+        <Label fx:id="billTotalLabel" styleClass="title-label"/>
+        <Label fx:id="billDateLabel"/>
+        <Button text="Print" onAction="#handlePrint"/>
+    </VBox>
+
+    <Button text="Back to Main Menu" onAction="#handleBack"/>
+</VBox>
