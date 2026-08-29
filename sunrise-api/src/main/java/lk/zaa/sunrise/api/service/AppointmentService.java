@@ -5,7 +5,9 @@ import lk.zaa.sunrise.api.entity.Appointment;
 import lk.zaa.sunrise.api.entity.Dentist;
 import lk.zaa.sunrise.api.entity.Patient;
 import lk.zaa.sunrise.api.entity.TreatmentType;
+import lk.zaa.sunrise.api.exception.DuplicateBookingException;
 import lk.zaa.sunrise.api.exception.ResourceNotFoundException;
+import lk.zaa.sunrise.common.enums.AppointmentStatus;
 import lk.zaa.sunrise.api.mapper.AppointmentMapper;
 import lk.zaa.sunrise.api.pattern.AppointmentNumberGenerator;
 import lk.zaa.sunrise.api.repository.AppointmentRepository;
@@ -48,6 +50,16 @@ public class AppointmentService {
 
         TreatmentType treatment = treatmentTypeRepository.findById(request.getTreatmentId())
                 .orElseThrow(() -> new ResourceNotFoundException("Treatment type not found: " + request.getTreatmentId()));
+
+        boolean clash = appointmentRepository
+                .existsByDentist_DentistIdAndAppointmentDateAndAppointmentTimeAndStatusNot(
+                        request.getDentistId(), request.getAppointmentDate(), request.getAppointmentTime(),
+                        AppointmentStatus.CANCELLED);
+        if (clash) {
+            throw new DuplicateBookingException(
+                    "Dr. " + dentist.getName() + " already has an appointment at "
+                            + request.getAppointmentDate() + " " + request.getAppointmentTime());
+        }
 
         Patient patient = new Patient(request.getPatientName(), request.getAddress(), request.getContactNumber());
         patientRepository.save(patient);
