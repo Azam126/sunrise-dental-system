@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="10" styleClass="root-pane"
+      xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="lk.zaa.sunrise.client.controller.RegisterAppointmentController">
+    <padding><Insets top="20" right="30" bottom="20" left="30"/></padding>
+
+    <Label text="Register New Appointment" styleClass="title-label">
+        <font><Font size="18"/></font>
+    </Label>
+
+    <GridPane hgap="10" vgap="8">
+        <Label text="Patient Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="patientNameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Address:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="addressField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Contact Number:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="contactNumberField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Label text="Dentist:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="dentistComboBox" GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="240"/>
+
+        <Label text="Treatment Type:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="treatmentComboBox" GridPane.rowIndex="4" GridPane.columnIndex="1" prefWidth="240"/>
+
+        <Label text="Appointment Date:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+        <DatePicker fx:id="appointmentDatePicker" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+        <Label text="Appointment Time (HH:mm):" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+        <TextField fx:id="appointmentTimeField" GridPane.rowIndex="6" GridPane.columnIndex="1" promptText="e.g. 14:30"/>
+    </GridPane>
+
+    <Label fx:id="messageLabel" styleClass="error-label" wrapText="true"/>
+
+    <HBox spacing="10">
+        <Button text="Register Appointment" onAction="#handleRegister"/>
+        <Button text="Back to Main Menu" onAction="#handleBack"/>
+    </HBox>
+</VBox>
