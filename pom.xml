@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>lk.zaa.sunrise</groupId>
+  <artifactId>sunrise-dental-system</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+
+  <name>Sunrise Dental Clinic - Appointment and Patient Management System</name>
+  <description>
+    CIS6003 Advanced Programming (WRIT1) coursework project.
+    A distributed, 3-tier application: JavaFX desktop client, Spring Boot REST API,
+    and a MySQL database, built for the Sunrise Dental Clinic scenario.
+  </description>
+
+  <modules>
+    <module>sunrise-common</module>
+    <module>sunrise-api</module>
+    <module>sunrise-client</module>
+  </modules>
+
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <spring-boot.version>3.3.2</spring-boot.version>
+    <javafx.version>21.0.2</javafx.version>
+    <jjwt.version>0.12.5</jjwt.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+</project>
