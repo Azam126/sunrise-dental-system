@@ -6,7 +6,7 @@
 
 <VBox spacing="10" styleClass="root-pane"
       xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="lk.zaa.sunrise.client.controller.BillController">
+      fx:controller="lk.zaa.sunrise.client.controller.BillScreenController">
     <padding><Insets top="20" right="30" bottom="20" left="30"/></padding>
 
     <Label text="Generate &amp; Print Bill" styleClass="title-label">
