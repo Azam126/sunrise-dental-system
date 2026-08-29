@@ -11,8 +11,15 @@ import lk.zaa.sunrise.client.service.ApiClient;
 import lk.zaa.sunrise.client.service.ApiException;
 import lk.zaa.sunrise.common.dto.BillResponse;
 
-/** Implements the Generate and Print Bill sequence diagram from Task A, Figure 5. */
-public class BillController {
+/**
+ * Implements the Generate and Print Bill sequence diagram from Task A, Figure 5.
+ * Named BillScreenController (rather than just BillController) so it reads
+ * unambiguously next to lk.zaa.sunrise.api.controller.BillController, the
+ * REST endpoint this screen calls — the two live in different modules/JVMs
+ * and would have compiled fine either way, but distinct names make the
+ * client/API boundary easier to follow when reading the codebase.
+ */
+public class BillScreenController {
 
     @FXML private TextField appointmentNumberField;
     @FXML private Label messageLabel;
@@ -56,6 +63,8 @@ public class BillController {
 
     @FXML
     private void handlePrint() {
+        // "Print Bill / Receipt" (Task A UC9) — renders the bill panel to
+        // whatever printer the receptionist's machine has configured.
         PrinterJob job = PrinterJob.createPrinterJob();
         if (job != null && job.showPrintDialog(billPane.getScene().getWindow())) {
             boolean success = job.printPage(billPane);

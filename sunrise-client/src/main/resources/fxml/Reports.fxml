@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="14" styleClass="root-pane"
+      xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="lk.zaa.sunrise.client.controller.ReportsController">
+    <padding><Insets top="20" right="30" bottom="20" left="30"/></padding>
+
+    <Label text="Clinic Reports (Administrator)" styleClass="title-label">
+        <font><Font size="16"/></font>
+    </Label>
+
+    <TitledPane text="Daily Report" expanded="true" collapsible="false">
+        <VBox spacing="8">
+            <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Date:"/>
+                <DatePicker fx:id="dailyDatePicker"/>
+                <Button text="Run Report" onAction="#handleDailyReport"/>
+            </HBox>
+            <Label fx:id="dailyMessageLabel" styleClass="error-label" wrapText="true"/>
+            <Label fx:id="dailyResultLabel" wrapText="true"/>
+        </VBox>
+    </TitledPane>
+
+    <TitledPane text="Revenue by Treatment" expanded="true" collapsible="false">
+        <VBox spacing="8">
+            <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="From:"/>
+                <DatePicker fx:id="fromDatePicker"/>
+                <Label text="To:"/>
+                <DatePicker fx:id="toDatePicker"/>
+                <Button text="Run Report" onAction="#handleRevenueReport"/>
+            </HBox>
+            <Label fx:id="revenueMessageLabel" styleClass="error-label" wrapText="true"/>
+            <TableView fx:id="revenueTable" prefHeight="160">
+                <columns>
+                    <TableColumn fx:id="treatmentColumn" text="Treatment" prefWidth="200"/>
+                    <TableColumn fx:id="countColumn" text="Appointments" prefWidth="110"/>
+                    <TableColumn fx:id="revenueColumn" text="Revenue (Rs.)" prefWidth="140"/>
+                </columns>
+            </TableView>
+            <Label fx:id="revenueTotalLabel" styleClass="title-label"/>
+        </VBox>
+    </TitledPane>
+
+    <Button text="Back to Main Menu" onAction="#handleBack"/>
+</VBox>

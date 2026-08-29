@@ -80,6 +80,19 @@ public class ApiClient {
         return parseList(response, UserDto[].class);
     }
 
+    // ---- admin: reports -------------------------------------------------
+
+    public DailyReportResponse dailyReport(java.time.LocalDate date) throws IOException, InterruptedException {
+        HttpResponse<String> response = get("/admin/reports/daily?date=" + date);
+        return parse(response, DailyReportResponse.class);
+    }
+
+    public RevenueReportResponse revenueReport(java.time.LocalDate from, java.time.LocalDate to)
+            throws IOException, InterruptedException {
+        HttpResponse<String> response = get("/admin/reports/revenue?from=" + from + "&to=" + to);
+        return parse(response, RevenueReportResponse.class);
+    }
+
     // ---- plumbing -------------------------------------------------------
 
     private HttpRequest.Builder baseRequest(String path, boolean authenticated) {

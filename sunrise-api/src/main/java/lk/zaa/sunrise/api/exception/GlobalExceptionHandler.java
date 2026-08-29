@@ -36,6 +36,18 @@ public class GlobalExceptionHandler {
                 .body(new ApiError(409, ex.getMessage(), List.of()));
     }
 
+    @ExceptionHandler(DuplicateBookingException.class)
+    public ResponseEntity<ApiError> handleDuplicateBooking(DuplicateBookingException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new ApiError(409, ex.getMessage(), List.of()));
+    }
+
+    @ExceptionHandler(ReportUnavailableException.class)
+    public ResponseEntity<ApiError> handleReportUnavailable(ReportUnavailableException ex) {
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+                .body(new ApiError(503, ex.getMessage(), List.of()));
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiError> handleValidation(MethodArgumentNotValidException ex) {
         List<String> details = ex.getBindingResult().getFieldErrors().stream()

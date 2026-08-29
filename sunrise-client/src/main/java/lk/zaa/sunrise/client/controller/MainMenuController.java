@@ -16,6 +16,7 @@ public class MainMenuController {
 
     @FXML private Label welcomeLabel;
     @FXML private Button manageStaffButton;
+    @FXML private Button reportsButton;
 
     @FXML
     private void initialize() {
@@ -25,6 +26,8 @@ public class MainMenuController {
         boolean isAdmin = session.isAdministrator();
         manageStaffButton.setVisible(isAdmin);
         manageStaffButton.setManaged(isAdmin);
+        reportsButton.setVisible(isAdmin);
+        reportsButton.setManaged(isAdmin);
     }
 
     @FXML
@@ -45,6 +48,11 @@ public class MainMenuController {
     @FXML
     private void openManageStaff() {
         SunriseClientApp.navigateTo("/fxml/ManageStaff.fxml", 560, 480);
+    }
+
+    @FXML
+    private void openReports() {
+        SunriseClientApp.navigateTo("/fxml/Reports.fxml", 620, 560);
     }
 
     @FXML

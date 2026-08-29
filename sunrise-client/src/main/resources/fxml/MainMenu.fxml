@@ -23,6 +23,7 @@
             <Button text="Search / View Appointment" prefWidth="260" onAction="#openSearchAppointment"/>
             <Button text="Generate &amp; Print Bill" prefWidth="260" onAction="#openBill"/>
             <Button fx:id="manageStaffButton" text="Manage Staff Accounts (Admin)" prefWidth="260" onAction="#openManageStaff" managed="false" visible="false"/>
+            <Button fx:id="reportsButton" text="View Clinic Reports (Admin)" prefWidth="260" onAction="#openReports" managed="false" visible="false"/>
             <Button text="Help Guide" prefWidth="260" onAction="#openHelp"/>
             <Button text="Exit" prefWidth="260" onAction="#handleExit"/>
         </VBox>
