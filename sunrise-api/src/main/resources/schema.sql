@@ -2,8 +2,8 @@
 -- MySQL schema. Applied automatically by Spring Boot on startup (spring.sql.init).
 -- Matches the entities in lk.zaa.sunrise.api.entity, which mirror the Task A class diagram.
 --
--- NOTE: the double-booking trigger is NOT in this file — see triggers.sql
--- and the README for why, and how to apply it.
+-- NOTE: the double-booking trigger and revenue function are NOT in this
+-- file — see db-extras.sql and the README for why, and how to apply them.
 
 CREATE TABLE IF NOT EXISTS users (
     user_id        BIGINT AUTO_INCREMENT PRIMARY KEY,
