@@ -1,0 +1,29 @@
+# Activated via @ActiveProfiles("test") on integration test classes.
+# Uses an in-memory H2 database instead of MySQL so the test suite is fully
+# self-contained and runs the same way on any machine (including CI),
+# without needing a real MySQL server. schema.sql/data.sql are MySQL-specific
+# (ENGINE=InnoDB etc.) so they are switched off here — Hibernate generates
+# the schema from the entities instead, which is fine for tests since we
+# only need structurally-correct tables, not the exact production DDL.
+spring:
+  datasource:
+    url: jdbc:h2:mem:sunrise_test;DB_CLOSE_DELAY=-1;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+
+  sql:
+    init:
+      mode: never
+
+sunrise:
+  jwt:
+    secret: test-only-secret-key-not-used-anywhere-near-production-32chars
+    expiration-ms: 3600000
