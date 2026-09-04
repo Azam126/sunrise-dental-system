@@ -169,4 +169,103 @@ requires the `ADMINISTRATOR` role. Passwords are BCrypt-hashed
 - `sunrise-client/src/main/java/.../ApiClient.java` hard-codes
   `http://localhost:8080/api` — move this to a config file if you'll run the
   client against a non-local API.
-- Task C (testing) and Task D (Git/GitHub) build on top of this structure.
+
+## Testing (Task C)
+
+47 automated tests across three levels — unit (Mockito/AssertJ), repository
+integration (`@DataJpaTest` + H2), and full-stack integration (`@SpringBootTest`
++ MockMvc + real JWTs). Run them with:
+
+```bash
+mvn test
+```
+
+See `docs/CIS6003_WRIT1_TaskC.docx` for the full test plan, the test-driven-development
+narrative (including the genuine `Clock`-injection refactor visible in the Git
+history below), and the traceability matrix linking tests back to the brief's
+requirements.
+
+## Version Control and Git Workflow (Task D)
+
+This repository's history is real, not reconstructed after the fact — commit
+dates reflect when each piece was actually written across three work
+sessions (29 Aug, 30 Aug, and 4 Sep 2026), and two commits are genuine
+before/after pairs: the double-booking check going from absent to present in
+`fix(api): add application-level double-booking check`, and the `Clock`
+refactor in `refactor(api): inject Clock into AppointmentNumberGenerator and
+BillBuilder`, which the Task C report describes in the same terms.
+
+**Branching model:** short-lived feature branches off `main`, merged back with
+`--no-ff` so the graph keeps each unit of work visible instead of flattening
+it into `main`'s straight-line history:
+
+| Branch | Contains |
+|---|---|
+| `feature/api-core` | sunrise-api: entities, design patterns, repositories, security, services, controllers |
+| `feature/javafx-client` | sunrise-client: all six screens from the Task A Use Case diagram |
+| `feature/hardening-and-reports` | Application-level double-booking check; administrator reports feature |
+| `feature/testing-suite` | The `Clock` refactor and all 47 tests (Task C) |
+| `feature/ci-and-docs` | GitHub Actions workflow; this docs folder (Task D) |
+
+**Tags** mark each integrated milestone: `v0.1.0-api-core` → `v0.1.0` (client
+complete) → `v0.2.0` (reports + hardening) → `v0.3.0` (testing complete) →
+`v1.0.0` (CI + docs). `git log --oneline --graph --all` shows the full graph;
+`git tag -l -n1` lists each tag with its message.
+
+**Commit convention:** Conventional-Commits-style prefixes throughout
+(`feat`, `fix`, `refactor`, `test`, `docs`, `chore`, `ci`) so the history
+itself documents what kind of change each commit was, without needing to
+open every diff.
+
+**Workflow (CI/CD):** `.github/workflows/ci.yml` runs `mvn clean test` on
+every push and pull request against `main`, uploading the Surefire reports
+as a build artifact — this is what actually proves the 47 tests pass, rather
+than relying solely on a screenshot taken once locally.
+
+### Pushing this repository to GitHub
+
+This project was built and version-controlled in a sandboxed environment
+with no GitHub account or credentials available to it, so the repository
+below was prepared locally and needs to be pushed by you:
+
+1. On GitHub, create a **new, empty, public** repository — do **not** tick
+   "Add a README", "Add .gitignore", or "Choose a license" (an empty repo
+   avoids a merge conflict with the history already prepared here).
+2. From this project's root:
+   ```bash
+   git remote add origin https://github.com/<your-username>/<repo-name>.git
+   git push -u origin main
+   git push origin --all      # pushes every feature branch too
+   git push origin --tags     # pushes v0.1.0-api-core, v0.1.0, v0.2.0, v0.3.0, v1.0.0
+   ```
+3. **Before pushing**, if you want commits attributed to your own GitHub
+   account (so they show your avatar and count toward your contribution
+   graph), update the author identity and rewrite history to match:
+   ```bash
+   git config user.name "Your Name"
+   git config user.email "your-github-account-email@example.com"
+   git filter-branch -f --env-filter '
+     export GIT_AUTHOR_NAME="Your Name"
+     export GIT_AUTHOR_EMAIL="your-github-account-email@example.com"
+     export GIT_COMMITTER_NAME="Your Name"
+     export GIT_COMMITTER_EMAIL="your-github-account-email@example.com"
+   ' --tag-name-filter cat -- --all
+   ```
+   (Skip this step if the current placeholder identity is fine for
+   submission — the commit *dates* are unaffected either way.)
+4. Once pushed, go to **Settings → General** and confirm the repository
+   visibility is **Public** (required by the brief) — take a screenshot of
+   this for your documentation.
+5. Open the **Actions** tab, confirm the CI workflow ran and passed on the
+   push, and screenshot that too — this is the "workflow deployed with the
+   Git repository" evidence the brief asks for.
+6. Optionally, open a real Pull Request for one of the feature branches
+   (e.g. `feature/ci-and-docs` → `main`) to additionally demonstrate GitHub's
+   PR review workflow, then merge it there.
+
+## Documentation
+
+- `docs/CIS6003_WRIT1_TaskA.docx` — Task A: system design and UML diagrams.
+- `docs/CIS6003_WRIT1_TaskC.docx` — Task C: test plan, TDD rationale, and
+  traceability matrix.
+
