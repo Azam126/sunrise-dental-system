@@ -5,7 +5,7 @@ import lk.zaa.sunrise.api.entity.Appointment;
 import lk.zaa.sunrise.api.entity.Bill;
 import lk.zaa.sunrise.api.exception.ResourceNotFoundException;
 import lk.zaa.sunrise.api.mapper.BillMapper;
-import lk.zaa.sunrise.api.pattern.BillBuilder;
+import lk.zaa.sunrise.api.entity.BillBuilder;
 import lk.zaa.sunrise.api.repository.AppointmentRepository;
 import lk.zaa.sunrise.api.repository.BillRepository;
 import lk.zaa.sunrise.common.dto.BillResponse;

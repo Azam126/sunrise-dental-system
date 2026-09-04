@@ -7,7 +7,10 @@ import java.time.LocalDate;
 /**
  * Composition with Appointment (Task A: Appointment "1" *-- "1" Bill): a Bill
  * has no meaning without its Appointment and is only ever created through
- * BillBuilder (Builder pattern) — see pattern/BillBuilder.java.
+ * BillBuilder (Builder pattern) — see BillBuilder.java in this same package.
+ * (BillBuilder lives here, alongside Bill, specifically so its all-args
+ * constructor's package-private access below is actually reachable —
+ * see BillBuilder's own Javadoc for the compile bug this fixes.)
  */
 @Entity
 @Table(name = "bills")

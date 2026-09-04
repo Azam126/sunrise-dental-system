@@ -3,7 +3,6 @@ package lk.zaa.sunrise.api.service;
 import lk.zaa.sunrise.api.entity.*;
 import lk.zaa.sunrise.api.exception.ResourceNotFoundException;
 import lk.zaa.sunrise.api.mapper.BillMapper;
-import lk.zaa.sunrise.api.pattern.BillBuilder;
 import lk.zaa.sunrise.api.pattern.StandardFeeStrategy;
 import lk.zaa.sunrise.api.repository.AppointmentRepository;
 import lk.zaa.sunrise.api.repository.BillRepository;

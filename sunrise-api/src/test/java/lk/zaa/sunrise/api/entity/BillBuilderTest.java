@@ -1,10 +1,7 @@
-package lk.zaa.sunrise.api.pattern;
+package lk.zaa.sunrise.api.entity;
 
-import lk.zaa.sunrise.api.entity.Appointment;
-import lk.zaa.sunrise.api.entity.Bill;
-import lk.zaa.sunrise.api.entity.Dentist;
-import lk.zaa.sunrise.api.entity.Patient;
-import lk.zaa.sunrise.api.entity.TreatmentType;
+import lk.zaa.sunrise.api.pattern.FeeCalculationStrategy;
+import lk.zaa.sunrise.api.pattern.StandardFeeStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
@@ -39,9 +36,6 @@ class BillBuilderTest {
     @Test
     @DisplayName("BillBuilder uses whichever FeeCalculationStrategy it is given, not the treatment's own fee")
     void usesWhateverFeeStrategyItIsGiven() {
-        // Demonstrates the STRATEGY pattern's whole point: BillBuilder does not
-        // know or care how the fee is calculated — swapping in a different
-        // strategy changes the bill total without touching BillBuilder at all.
         FeeCalculationStrategy alwaysFiveThousand = appointment -> new BigDecimal("5000.00");
         Clock fixedClock = Clock.fixed(Instant.parse("2026-08-29T12:00:00Z"), ZoneId.of("UTC"));
 

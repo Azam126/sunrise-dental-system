@@ -41,7 +41,7 @@ exists) — see the class Javadoc for each:
 | **Singleton** | `api/pattern/AppointmentNumberGenerator.java` | One authority for appointment numbers, so two receptionists working at once can never collide |
 | **Singleton** (client-side) | `client/util/Session.java` | One signed-in user per running client instance |
 | **Factory** | `api/pattern/UserFactory.java` | Decides Administrator vs Receptionist at runtime from the role an admin picks |
-| **Builder** | `api/pattern/BillBuilder.java` | `Bill`'s constructor is package-private; only the builder can produce a valid, fully-calculated bill |
+| **Builder** | `api/entity/BillBuilder.java` | `Bill`'s constructor is package-private; only the builder can produce a valid, fully-calculated bill. Lives in `entity`, not `pattern`, specifically so that package-private access actually works — see the class's own Javadoc for the compile bug this fixes |
 | **Strategy** | `api/pattern/FeeCalculationStrategy.java` + `StandardFeeStrategy.java` | How a bill total is calculated is swappable without touching `BillBuilder`, `Bill`, or any controller |
 | **Repository** | `api/repository/*.java` (Spring Data JPA) | Persistence is abstracted behind an interface per aggregate |
 | **DTO / Mapper** | `api/mapper/*.java` | Entities never leave the service layer; the REST contract stays stable independent of the entity model |
