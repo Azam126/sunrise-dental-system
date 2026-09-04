@@ -1,0 +1,38 @@
+name: CI
+
+# Runs the full test suite on every push and pull request against main -
+# this is the "workflow deployed with the Git repository" Task D asks for.
+# Given a real internet connection (unlike the sandbox this project was
+# built in), this downloads all Maven dependencies fresh and actually
+# proves the 47 tests documented in the Task C report pass.
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build and run tests (all modules)
+        run: mvn -B clean test
+
+      - name: Upload Surefire test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: '**/target/surefire-reports/*.txt'
