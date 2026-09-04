@@ -180,10 +180,11 @@ integration (`@DataJpaTest` + H2), and full-stack integration (`@SpringBootTest`
 mvn test
 ```
 
-See `docs/CIS6003_WRIT1_TaskC.docx` for the full test plan, the test-driven-development
+See the full test plan document for the test-driven-development
 narrative (including the genuine `Clock`-injection refactor visible in the Git
 history below), and the traceability matrix linking tests back to the brief's
-requirements.
+requirements — the report was delivered separately outside this repository;
+see the note under Documentation below.
 
 ## Version Control and Git Workflow (Task D)
 
@@ -265,17 +266,9 @@ below was prepared locally and needs to be pushed by you:
 
 ## Documentation
 
-**`docs/CIS6003_WRIT1_Combined.docx` is the complete, single-file submission
-document** — Parts A, B, C and D together with one title page, one table of
-contents, and continuous page numbering, matching the brief's requirement to
-submit one PDF. Convert it to PDF and rename it to your student ID before
-uploading to Turnitin (e.g. `st12345678_CIS6003_WRIT1.pdf`), per the
-assessment brief's file-naming convention.
-
-The four individual reports remain in `docs/` as well, for reference:
-
-- `docs/CIS6003_WRIT1_TaskA.docx` — Task A: system design and UML diagrams.
-- `docs/CIS6003_WRIT1_TaskC.docx` — Task C: test plan, TDD rationale, and
-  traceability matrix.
-- `docs/CIS6003_WRIT1_TaskD.docx` — Task D: version control documentation.
+The written assessment report (Parts A–D: system design, implementation,
+testing/TDD, and version control) is submitted separately as a standalone
+Word/PDF document and is **not** committed to this repository — this repo is
+kept focused on the software project itself (source code, configuration, and
+CI), rather than carrying large binary report files in its history.
 
