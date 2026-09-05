@@ -26,12 +26,23 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  * *ServiceTest classes do. This is what actually proves the queries
  * AppointmentService relies on are correct, not just that the service calls
  * them with the right arguments.
+ *
+ * BUG FIX: this class does not activate the "test" Spring profile (unlike
+ * AbstractIntegrationTest's subclasses), so application.yml's
+ * spring.jpa.properties.hibernate.dialect=MySQLDialect was still in effect
+ * even though @AutoConfigureTestDatabase swaps the datasource to H2 —
+ * Hibernate then generated MySQL-flavoured DDL (engine=InnoDB) that H2's
+ * parser rejects, failing every CREATE TABLE. The explicit H2Dialect
+ * override below (caught by a real local JUnit run this sandbox could
+ * never perform) fixes that mismatch directly in this class's own
+ * properties, independent of which profile is active.
  */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @TestPropertySource(properties = {
         "spring.jpa.hibernate.ddl-auto=create-drop",
-        "spring.sql.init.mode=never"
+        "spring.sql.init.mode=never",
+        "spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect"
 })
 class AppointmentRepositoryTest {
 
