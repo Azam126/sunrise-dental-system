@@ -25,6 +25,17 @@
   <properties>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
+    <!--
+      Without this, @PathVariable/@RequestParam without an explicit name
+      (e.g. @PathVariable String appointmentNumber) fail at runtime with
+      "Name for argument of type [...] not specified, and parameter name
+      information not available via reflection" - Spring needs either an
+      explicit name or -parameters to match a method parameter to a path
+      template variable / query parameter. Caught by a real local run
+      (500 instead of 404 on an unknown-appointment lookup) this sandbox
+      could never perform itself.
+    -->
+    <maven.compiler.parameters>true</maven.compiler.parameters>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spring-boot.version>3.3.2</spring-boot.version>
     <javafx.version>21.0.2</javafx.version>
