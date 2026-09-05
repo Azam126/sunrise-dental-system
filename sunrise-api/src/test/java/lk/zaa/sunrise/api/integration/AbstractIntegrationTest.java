@@ -19,10 +19,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Shared base for full-stack ("does the whole request/response cycle behave
  * correctly, including real JWT security and a real — if in-memory —
- * database") integration tests. Each subclass gets a fresh H2 database
- * (create-drop) and MockMvc wired to the real SecurityFilterChain, so a
- * token obtained from loginAndGetToken() is a genuine JWT that
- * JwtAuthFilter/SecurityConfig validate exactly as they would in production.
+ * database") integration tests. MockMvc is wired to the real
+ * SecurityFilterChain, so a token obtained from loginAndGetToken() is a
+ * genuine JWT that JwtAuthFilter/SecurityConfig validate exactly as they
+ * would in production.
+ *
+ * BUG FIX: the class-level doc comment here used to claim "each subclass
+ * gets a fresh H2 database" - that was never actually true. Spring's test
+ * framework caches and reuses one ApplicationContext (and therefore one H2
+ * database, since its URL uses DB_CLOSE_DELAY=-1) across every test class
+ * that shares this exact configuration - which is all four
+ * AbstractIntegrationTest subclasses. seedStaffAccounts() re-inserting
+ * 'admin'/'reception' before every single @Test method, across every
+ * subclass, without ever clearing the table first, hit the username unique
+ * constraint on the second call onwards (caught by a real local run this
+ * sandbox could never perform). Deleting first makes it idempotent
+ * regardless of whether the context/database is fresh or reused.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
@@ -41,6 +53,7 @@ public abstract class AbstractIntegrationTest {
 
     @BeforeEach
     void seedStaffAccounts() {
+        userRepository.deleteAll();
         userRepository.save(new Administrator(ADMIN_USERNAME, passwordEncoder.encode(ADMIN_PASSWORD), "Nadeesha Perera"));
         userRepository.save(new Receptionist(RECEPTIONIST_USERNAME, passwordEncoder.encode(RECEPTIONIST_PASSWORD), "Kasun Silva"));
     }
