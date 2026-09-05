@@ -1,5 +1,7 @@
 # Sunrise Dental Clinic — Appointment and Patient Management System
 
+[![CI](https://github.com/Azam126/sunrise-dental-system/actions/workflows/ci.yml/badge.svg)](https://github.com/Azam126/sunrise-dental-system/actions/workflows/ci.yml)
+
 CIS6003 Advanced Programming (WRIT1) coursework project.
 A distributed, 3-tier application built for the Sunrise Dental Clinic scenario:
 
@@ -179,6 +181,13 @@ integration (`@DataJpaTest` + H2), and full-stack integration (`@SpringBootTest`
 ```bash
 mvn test
 ```
+
+**Confirmed passing 47/47**, both in a local run and via the CI workflow
+below (see the badge at the top of this file). Getting there took six real
+rounds of fixing — a cross-package access bug, two wrong library import
+paths, a Hibernate/H2 dialect mismatch, a missing compiler flag, and a test
+isolation bug — each found from an actual compiler or test run and fixed in
+its own commit; see the commit history for the exact sequence.
 
 See the full test plan document for the test-driven-development
 narrative (including the genuine `Clock`-injection refactor visible in the Git
